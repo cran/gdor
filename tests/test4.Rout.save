@@ -1,0 +1,76 @@
+
+R version 2.15.1 (2012-06-22) -- "Roasted Marshmallows"
+Copyright (C) 2012 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+Platform: x86_64-unknown-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(gdor)
+Loading required package: rcdd
+If you want correct answers, use rational arithmetic.
+See the Warnings sections added to help pages for
+    functions that do computational geometry.
+
+> 
+> m1 <- gdor(cbind(ncases, ncontrols) ~ agegp + tobgp * alcgp, 
++ 	   family = binomial, data=esoph)
+> 
+> summary(m1)
+
+Call:
+glm(formula = cbind(ncases, ncontrols) ~ agegp + tobgp * alcgp, 
+    family = binomial, data = esoph, x = TRUE)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.8895  -0.5317  -0.2304   0.2704   2.0724  
+
+Coefficients:
+                Estimate Std. Error z value Pr(>|z|)    
+(Intercept)     -1.75985    0.19822  -8.878  < 2e-16 ***
+agegp.L          2.99646    0.65386   4.583 4.59e-06 ***
+agegp.Q         -1.35008    0.59197  -2.281   0.0226 *  
+agegp.C          0.13436    0.45056   0.298   0.7655    
+agegp^4          0.07098    0.30974   0.229   0.8187    
+agegp^5         -0.21347    0.19627  -1.088   0.2768    
+tobgp.L          0.63846    0.19710   3.239   0.0012 ** 
+tobgp.Q          0.02922    0.19617   0.149   0.8816    
+tobgp.C          0.15607    0.19796   0.788   0.4304    
+alcgp.L          1.37077    0.21136   6.485 8.85e-11 ***
+alcgp.Q         -0.14913    0.19645  -0.759   0.4478    
+alcgp.C          0.22823    0.18203   1.254   0.2099    
+tobgp.L:alcgp.L -0.70426    0.41128  -1.712   0.0868 .  
+tobgp.Q:alcgp.L  0.12225    0.42044   0.291   0.7712    
+tobgp.C:alcgp.L -0.29187    0.42939  -0.680   0.4967    
+tobgp.L:alcgp.Q  0.12948    0.38889   0.333   0.7392    
+tobgp.Q:alcgp.Q -0.44527    0.39224  -1.135   0.2563    
+tobgp.C:alcgp.Q -0.05205    0.39538  -0.132   0.8953    
+tobgp.L:alcgp.C -0.16118    0.36697  -0.439   0.6605    
+tobgp.Q:alcgp.C  0.04843    0.36211   0.134   0.8936    
+tobgp.C:alcgp.C -0.13905    0.35754  -0.389   0.6973    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 227.241  on 87  degrees of freedom
+Residual deviance:  47.484  on 67  degrees of freedom
+AIC: 236.96
+
+Number of Fisher Scoring iterations: 6
+
+> 
+> proc.time()
+   user  system elapsed 
+  0.247   0.038   0.484 

@@ -1,0 +1,7 @@
+export(gdor, anova.gdor, anova.gdorlist)
+
+import(rcdd)
+
+S3method(print, summary.gdor)
+S3method(summary, gdor)
+

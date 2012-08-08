@@ -1,0 +1,84 @@
+
+R version 2.15.1 (2012-06-22) -- "Roasted Marshmallows"
+Copyright (C) 2012 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+Platform: x86_64-unknown-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(gdor) 
+Loading required package: rcdd
+If you want correct answers, use rational arithmetic.
+See the Warnings sections added to help pages for
+    functions that do computational geometry.
+
+> team.names <- c("ants", "beetles", "cows", "dogs",
++ "egrets", "foxes", "gerbils", "hogs")
+> 
+> data <- matrix(c(NA, 2, 2, 2, 2, 2, 2, 2, 0, NA,
++ 1, 2, 2, 2, 2, 2, 0, 1, NA, 2, 1, 2, 2, 2, 0,
++ 0, 0, NA, 1, 1, 2, 2, 0, 0, 1, 1, NA, 1, 2, 2,
++ 0, 0, 0, 1, 1, NA, 2, 2, 0, 0, 0, 0, 0, 0, NA,
++ 1, 0, 0, 0, 0, 0, 0, 1, NA), byrow = TRUE, nrow = 8)
+> dimnames(data) <- list(team.names, team.names)
+> 
+> wins <- data[upper.tri(data)]
+> team.plus <- row(data)[upper.tri(data)]
+> team.minus <- col(data)[upper.tri(data)]
+> modmat <- matrix(0, length(wins), nrow(data))
+> 
+> for (i in 1:ncol(modmat)) {
++ modmat[team.plus == i, i] <- 1
++ modmat[team.minus == i, i] <- (-1)
++ }
+> losses <- 2 - wins
+> resp <- cbind(wins, losses)
+> 
+> # out <- glm(resp ~ modmat + 0, family = binomial)
+> out <- gdor(resp ~ modmat + 0, family = binomial) 
+> 
+> summary(out)
+
+Call:
+ glm(formula = Y.cond ~ data.cond + 0, family = binomial, data = "data.cond") 
+
+ MLE failed to exist, solution is 'at infinity'. A limiting conditional model
+ had to be implemented to obtain relevant output. MLE exists 'at infinity'
+ in direction: 
+[1] 2 1 1 1 1 1 0 0
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.1692  -0.1970   0.3941   0.5038   0.6153  
+
+Coefficients: (17 not defined because of singularities)
+                   Estimate Std. Error z value Pr(>|z|)  
+data.condmodmat2  3.024e+00  1.487e+00   2.034   0.0419 *
+data.condmodmat3  2.310e+00  1.328e+00   1.740   0.0819 .
+data.condmodmat4 -5.189e-17  1.080e+00   0.000   1.0000  
+data.condmodmat5  5.609e-01  1.078e+00   0.520   0.6029  
+data.condmodmat7  0.000e+00  1.414e+00   0.000   1.0000  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 13.863  on 11  degrees of freedom
+Residual deviance:  3.391  on  6  degrees of freedom
+AIC: 21.709
+
+Number of Fisher Scoring iterations: 5
+> 
+> proc.time()
+   user  system elapsed 
+  0.200   0.030   0.398 

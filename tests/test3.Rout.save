@@ -1,0 +1,184 @@
+
+R version 2.15.1 (2012-06-22) -- "Roasted Marshmallows"
+Copyright (C) 2012 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+Platform: x86_64-unknown-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(gdor)
+Loading required package: rcdd
+If you want correct answers, use rational arithmetic.
+See the Warnings sections added to help pages for
+    functions that do computational geometry.
+
+> 
+> data <- read.table(url("http://www.stat.umn.edu/geyer/gdor/catrec.txt"),
++                   header = TRUE)
+> 
+> try(m1 <- gdor(y ~ (v1 + v2 + v3 + v4 + v5 + v6 + v7)^2, family=poisson,
++                data=data))
+> try(m2 <- gdor(y ~ (v1 + v2 + v3 + v4 + v5 + v6 + v7)^3, family=poisson,
++                data=data))
+> 
+> try(summary(m1))
+
+Call:
+glm(formula = y ~ (v1 + v2 + v3 + v4 + v5 + v6 + v7)^2, family = poisson, 
+    data = data, x = TRUE)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-3.0185  -0.8561  -0.0579   0.5189   2.8261  
+
+Coefficients:
+             Estimate Std. Error z value Pr(>|z|)    
+(Intercept)  1.516399   0.231212   6.558 5.44e-11 ***
+v1           0.215304   0.226944   0.949  0.34277    
+v2           0.381865   0.228425   1.672  0.09458 .  
+v3          -0.162231   0.232519  -0.698  0.48536    
+v4          -0.794571   0.247432  -3.211  0.00132 ** 
+v5           0.519379   0.224386   2.315  0.02063 *  
+v6          -0.244163   0.234421  -1.042  0.29762    
+v7          -0.989726   0.251735  -3.932 8.44e-05 ***
+v1:v2       -0.496524   0.182927  -2.714  0.00664 ** 
+v1:v3        0.140355   0.176742   0.794  0.42712    
+v1:v4        0.236414   0.179404   1.318  0.18758    
+v1:v5       -0.501695   0.179584  -2.794  0.00521 ** 
+v1:v6        0.276192   0.176728   1.563  0.11810    
+v1:v7        0.049578   0.179372   0.276  0.78224    
+v2:v3        0.361539   0.181945   1.987  0.04691 *  
+v2:v4        0.579785   0.183619   3.158  0.00159 ** 
+v2:v5       -0.858686   0.183525  -4.679 2.89e-06 ***
+v2:v6       -0.312059   0.182749  -1.708  0.08771 .  
+v2:v7        0.349405   0.184806   1.891  0.05867 .  
+v3:v4        0.074804   0.179008   0.418  0.67603    
+v3:v5        0.377203   0.179095   2.106  0.03519 *  
+v3:v6       -0.284777   0.176426  -1.614  0.10650    
+v3:v7       -0.045700   0.178838  -0.256  0.79831    
+v4:v5       -0.006592   0.182128  -0.036  0.97113    
+v4:v6        0.449263   0.178791   2.513  0.01198 *  
+v4:v7        0.546638   0.180111   3.035  0.00241 ** 
+v5:v6        0.107522   0.179836   0.598  0.54991    
+v5:v7        0.094550   0.181988   0.520  0.60338    
+v6:v7        0.292608   0.178902   1.636  0.10193    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 301.50  on 127  degrees of freedom
+Residual deviance: 191.63  on  99  degrees of freedom
+AIC: 618.8
+
+Number of Fisher Scoring iterations: 6
+
+> 
+> try(summary(m2)) 
+
+Call:
+ glm(formula = y ~ (v1 + v2 + v3 + v4 + v5 + v6 + v7)^3, family = poisson, 
+    data = "data.cond", x = TRUE) 
+
+ MLE failed to exist, solution is 'at infinity'. A limiting conditional model
+ had to be implemented to obtain relevant output. MLE exists 'at infinity'
+ in direction: 
+ [1] "-1" "1"  "1"  "1"  "0"  "1"  "0"  "0"  "-1" "-1" "0"  "-1" "0"  "0"  "-1"
+[16] "0"  "-1" "0"  "0"  "0"  "-1" "0"  "0"  "0"  "0"  "0"  "0"  "0"  "0"  "1" 
+[31] "0"  "0"  "0"  "0"  "0"  "1"  "0"  "0"  "0"  "0"  "0"  "0"  "0"  "0"  "0" 
+[46] "1"  "0"  "0"  "0"  "0"  "0"  "0"  "0"  "0"  "0"  "0"  "0"  "0"  "0"  "0" 
+[61] "0"  "0"  "0"  "0" 
+
+Deviance Residuals: 
+     Min        1Q    Median        3Q       Max  
+-1.63571  -0.30009  -0.02353   0.27258   1.42540  
+
+Coefficients: (1 not defined because of singularities)
+             Estimate Std. Error z value Pr(>|z|)    
+(Intercept)  2.150481   0.585423   3.673 0.000239 ***
+v1           0.069795   0.587067   0.119 0.905364    
+v2          -0.524215   0.513583  -1.021 0.307396    
+v3           0.052966   0.551965   0.096 0.923552    
+v4          -0.709525   0.580147  -1.223 0.221326    
+v5           0.243002   0.548686   0.443 0.657853    
+v6          -1.163256   0.563668  -2.064 0.039044 *  
+v7          -0.990704   0.597335  -1.659 0.097208 .  
+v1:v2        0.384345   0.543024   0.708 0.479079    
+v1:v3       -0.630375   0.570151  -1.106 0.268888    
+v1:v4        0.008801   0.511458   0.017 0.986271    
+v1:v5       -1.022805   0.570440  -1.793 0.072971 .  
+v1:v6        0.540164   0.493879   1.094 0.274079    
+v1:v7        0.097178   0.536628   0.181 0.856297    
+v2:v3        0.602411   0.437371   1.377 0.168405    
+v2:v4        0.748226   0.486811   1.537 0.124295    
+v2:v5       -0.068926   0.428100  -0.161 0.872090    
+v2:v6        0.297165   0.487409   0.610 0.542071    
+v2:v7        0.274198   0.508369   0.539 0.589634    
+v3:v4       -0.124465   0.541056  -0.230 0.818060    
+v3:v5       -0.439354   0.468418  -0.938 0.348268    
+v3:v6        0.024399   0.530220   0.046 0.963296    
+v3:v7       -0.104400   0.556960  -0.187 0.851310    
+v4:v5       -0.169421   0.521323  -0.325 0.745194    
+v4:v6        0.756513   0.474213   1.595 0.110644    
+v4:v7        0.780671   0.500911   1.559 0.119114    
+v5:v6        1.245629   0.510770   2.439 0.014739 *  
+v5:v7       -0.262620   0.523125  -0.502 0.615652    
+v6:v7        0.697014   0.489957   1.423 0.154852    
+v1:v2:v3    -0.349902   0.483330  -0.724 0.469102    
+v1:v2:v4     0.101569   0.389778   0.261 0.794416    
+v1:v2:v5     0.655208   0.493737   1.327 0.184496    
+v1:v2:v6    -0.329286   0.390979  -0.842 0.399670    
+v1:v2:v7    -0.520368   0.393042  -1.324 0.185520    
+v1:v3:v4     0.353292   0.406623   0.869 0.384932    
+v1:v3:v5     0.638711   0.484979   1.317 0.187843    
+v1:v3:v6     0.352694   0.402715   0.876 0.381143    
+v1:v3:v7    -0.001586   0.413554  -0.004 0.996941    
+v1:v4:v5     0.664745   0.400212   1.661 0.096717 .  
+v1:v4:v6    -0.463885   0.368214  -1.260 0.207732    
+v1:v4:v7    -0.342583   0.372009  -0.921 0.357103    
+v1:v5:v6     0.044968   0.399958   0.112 0.910481    
+v1:v5:v7     0.447641   0.404364   1.107 0.268283    
+v1:v6:v7     0.218868   0.371499   0.589 0.555763    
+v2:v3:v4    -0.325914   0.404392  -0.806 0.420280    
+v2:v3:v6    -0.247853   0.405621  -0.611 0.541168    
+v2:v3:v7     0.028322   0.414520   0.068 0.945527    
+v2:v4:v5     0.004655   0.394418   0.012 0.990583    
+v2:v4:v6    -0.111152   0.373713  -0.297 0.766141    
+v2:v4:v7    -0.148061   0.376692  -0.393 0.694279    
+v2:v5:v6    -0.766051   0.394925  -1.940 0.052412 .  
+v2:v5:v7     0.075213   0.399004   0.189 0.850482    
+v2:v6:v7     0.460826   0.381109   1.209 0.226597    
+v3:v4:v5    -0.063494   0.423318  -0.150 0.880771    
+v3:v4:v6     0.357746   0.366298   0.977 0.328741    
+v3:v4:v7    -0.106368   0.371567  -0.286 0.774672    
+v3:v5:v6    -0.234816   0.422424  -0.556 0.578295    
+v3:v5:v7     0.804923   0.423843   1.899 0.057550 .  
+v3:v6:v7    -0.659090   0.371085  -1.776 0.075714 .  
+v4:v5:v6    -0.427957   0.375755  -1.139 0.254734    
+v4:v5:v7     0.125167   0.377356   0.332 0.740119    
+v4:v6:v7     0.014192   0.370131   0.038 0.969413    
+v5:v6:v7    -0.811516   0.377098  -2.152 0.031397 *  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 156.215  on 111  degrees of freedom
+Residual deviance:  31.291  on  49  degrees of freedom
+AIC: 526.46
+
+Number of Fisher Scoring iterations: 5
+> 
+> proc.time()
+   user  system elapsed 
+  9.745   0.042  10.023 

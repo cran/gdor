@@ -1,0 +1,63 @@
+
+R version 2.15.1 (2012-06-22) -- "Roasted Marshmallows"
+Copyright (C) 2012 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+Platform: x86_64-unknown-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(gdor)
+Loading required package: rcdd
+If you want correct answers, use rational arithmetic.
+See the Warnings sections added to help pages for
+    functions that do computational geometry.
+
+> 
+> data <- read.table(url("http://www.stat.umn.edu/geyer/gdor/catrec.txt"),
++                   header = TRUE)
+> 
+> try(m1 <- gdor(y ~ (v1 + v2 + v3 + v4 + v5 + v6 + v7)^2, family=poisson,
++                data=data))
+> try(m2 <- gdor(y ~ (v1 + v2 + v3 + v4 + v5 + v6 + v7)^3, family=poisson,
++                data=data))
+> try(m3 <- gdor(y ~ (v1 + v2 + v3 + v4 + v5 + v6 + v7)^4, family=poisson,
++                data=data))
+> 
+> try(anova(m1,m2))
+Analysis of Deviance Table
+
+Model 1: y ~ (v1 + v2 + v3 + v4 + v5 + v6 + v7)^2
+Model 2: y ~ (v1 + v2 + v3 + v4 + v5 + v6 + v7)^3
+  Resid. Df Resid. Dev Df Deviance  Pr(>Chi)    
+1        99    191.629                          
+2        64     31.291 35   160.34 < 2.2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1 
+> 
+> try(anova(m2,m3))
+Analysis of Deviance Table
+
+Model 1: y ~ (v1 + v2 + v3 + v4 + v5 + v6 + v7)^3
+Model 2: y ~ (v1 + v2 + v3 + v4 + v5 + v6 + v7)^4
+  Resid. Df Resid. Dev Df Deviance Pr(>Chi)
+1        63     31.291                     
+2        94     16.067 31   15.224   0.9921
+> 
+> 
+> 
+> 
+> 
+> 
+> proc.time()
+   user  system elapsed 
+ 26.176   0.024  26.464 

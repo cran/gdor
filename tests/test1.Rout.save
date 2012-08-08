@@ -1,0 +1,48 @@
+
+R version 2.15.1 (2012-06-22) -- "Roasted Marshmallows"
+Copyright (C) 2012 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+Platform: x86_64-unknown-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(gdor)
+Loading required package: rcdd
+If you want correct answers, use rational arithmetic.
+See the Warnings sections added to help pages for
+    functions that do computational geometry.
+
+> 
+> x <- 1:30
+> 
+> y <- c(rep(0, 12), rep(1, 11), rep(0, 7)) 
+> 
+> m <- gdor(y ~ x + I(x^2), family=binomial)
+> 
+> summary(m)
+
+Call:
+ glm(formula = y ~ x + I(x^2), family = binomial, x = TRUE, data = "data.cond") 
+
+ MLE failed to exist, solution is 'at infinity'. A limiting conditional model
+ had to be implemented to obtain relevant output. MLE exists 'at infinity'
+ in direction: 
+[1] 53.3636 -6.5455  0.1818
+
+ In addition, limiting conditional model is completely degenerate.
+> 
+> 
+> 
+> proc.time()
+   user  system elapsed 
+  0.176   0.040   0.402 
